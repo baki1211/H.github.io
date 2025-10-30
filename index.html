@@ -2,106 +2,185 @@
 <html lang="tr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Hira ♥️ Mehmet Ali</title>
   <style>
-    :root{--bg:#0f1724;--card:#0b1220;--accent:#ff6b81;--muted:#9aa4b2}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: radial-gradient(1200px 600px at 10% 10%, rgba(255,107,129,0.08), transparent), linear-gradient(180deg,#071027 0%, #071622 100%); color:#e6eef6;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
-    .card{width:100%;max-width:980px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border-radius:18px;box-shadow:0 10px 30px rgba(2,6,23,0.6);overflow:hidden;border:1px solid rgba(255,255,255,0.03)}
-    header{display:flex;gap:20px;align-items:center;padding:28px}
-    .avatar{width:112px;height:112px;border-radius:14px;flex:0 0 112px;background:linear-gradient(135deg,var(--accent),#6bd1ff);display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:700;color:#071227;box-shadow:0 6px 18px rgba(255,107,129,0.15)}
-    .title{flex:1}
-    h1{margin:0;font-size:28px;letter-spacing:0.4px}
-    p.lead{margin:6px 0 0;color:var(--muted)}
-    main{display:grid;grid-template-columns:1fr 360px;gap:18px;padding:18px}
-    .left{padding:18px}
-    .card-box{background:var(--card);padding:16px;border-radius:12px;margin-bottom:14px;border:1px solid rgba(255,255,255,0.02)}
-    .message{font-size:16px;line-height:1.5}
-    .small{color:var(--muted);font-size:14px}
-    .right{padding:18px}
-    .btn{display:inline-block;padding:10px 16px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#ffd37a);color:#071227;font-weight:700;border:none;cursor:pointer;box-shadow:0 8px 20px rgba(255,107,129,0.12)}
-    .heart{font-size:22px;margin-left:8px}
-    footer{padding:18px;border-top:1px solid rgba(255,255,255,0.02);text-align:center;color:var(--muted);font-size:13px}
+    :root {
+      --bg: #0f1724;
+      --card: #0b1220;
+      --accent: #ff6b81;
+      --muted: #9aa4b2;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #071027 0%, #071622 100%);
+      color: #e6eef6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+    }
+    .card {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    header {
+      text-align: center;
+      padding: 20px 10px;
+    }
+    .avatar {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 10px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--accent), #6bd1ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: bold;
+      color: #071227;
+      box-shadow: 0 4px 12px rgba(255, 107, 129, 0.3);
+    }
+    h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+    p.lead {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 5px 0 0;
+    }
+    main {
+      padding: 15px;
+    }
+    .card-box {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+    .message {
+      font-size: 15px;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 10px;
+      background: linear-gradient(90deg, var(--accent), #ffd37a);
+      color: #071227;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(255, 107, 129, 0.3);
+      margin-top: 10px;
+    }
+    .heart {
+      font-size: 20px;
+      margin-left: 6px;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
-    .hearts{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-    .hearts i{position:absolute;transform:translateY(0);opacity:0;animation:rise 6s linear infinite}
-    @keyframes rise{0%{transform:translateY(120% ) scale(.6);opacity:0}10%{opacity:1}50%{opacity:1}100%{transform:translateY(-30%) scale(1);opacity:0}}
-
-    @media (max-width:880px){main{grid-template-columns:1fr;}.avatar{width:84px;height:84px;font-size:34px;flex:0 0 84px}}
+    /* Floating hearts */
+    .hearts {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .hearts i {
+      position: absolute;
+      transform: translateY(0);
+      opacity: 0;
+      animation: rise 6s linear infinite;
+    }
+    @keyframes rise {
+      0% { transform: translateY(120%) scale(0.6); opacity: 0; }
+      10% { opacity: 1; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-30%) scale(1); opacity: 0; }
+    }
   </style>
 </head>
 <body>
-  <div class="card" role="main" aria-label="Hira için sevgili sayfası">
+  <div class="card">
     <div class="hearts" id="hearts"></div>
     <header>
-      <div class="avatar" aria-hidden="true">H</div>
-      <div class="title">
-        <h1>Hira ♥️ Mehmet Ali</h1>
-        <p class="lead">Sana özel küçük bir sayfa — sevgiyle yapıldı.</p>
-        <div style="margin-top:10px"><button class="btn" id="loveBtn">Seni seviyorum <span class="heart">❤</span></button></div>
-      </div>
-      <div style="padding-right:18px;color:var(--muted);text-align:right">
-        <div style="font-weight:700">Hazırlandı</div>
-        <div class="small">Mehmet Ali tarafından</div>
-      </div>
+      <div class="avatar">H</div>
+      <h1>Hira ♥️  Mehmet Ali</h1>
+      <p class="lead">Sana özel küçük bir sayfa — sevgiyle yapıldı.</p>
+      <button class="btn" id="loveBtn">Seni seviyorum <span class="heart">❤</span></button>
     </header>
 
     <main>
-      <section class="left">
-        <div class="card-box">
-          <div class="message">
-            Hiram ❤️<br><br>
-            Sen sormadın ama ben söyleyeyim 😄 1.5 yıldır falan kodlama yapıyorum. Site falan yapıp satıyorum ama bu sefer ikimiz için yapmak istedim. 💻❤️<br><br>
-            Bu site sadece bizim için, içten ve samimi bir hatıra olarak kalsın istedim.
-          </div>
+      <div class="card-box">
+        <div class="message">
+          Hiram ❤️<br><br>
+          Sen sormadın ama ben söyleyeyim  1.5 yıldır falan kodlama yapıyorum. Site falan yapıp satıyorum ama bu sefer ikimiz için yapmak istedim. 💻❤️<br><br>
+          Bu site sadece bizim için, içten ve samimi bir hatıra olarak kalsın istedim.
         </div>
-      </section>
+      </div>
 
-      <aside class="right">
-        <div class="card-box" style="text-align:center">
-          <div style="font-size:20px;font-weight:700">Bugün için bir sürpriz</div>
-          <p class="small">Aşağıdaki düğmeye bas, sana bir kalp göndereyim.</p>
-          <div style="margin-top:12px">
-            <button class="btn" id="surprise">Kalp Gönder</button>
-          </div>
-        </div>
-
-        <div class="card-box">
-          <div style="font-weight:700">Hızlı Bilgiler</div>
-          <div class="small" style="margin-top:8px">- Mehmet Ali tarafından tasarlandı 💻</div>
-          <div class="small">- Hira'ya sevgilerle 💖</div>
-        </div>
-      </aside>
+      <div class="card-box" style="text-align:center">
+        <div style="font-size:18px;font-weight:700">Bugün için bir sürpriz</div>
+        <p style="font-size:13px;color:var(--muted)">Aşağıdaki düğmeye bas, sana bir kalp göndereyim.</p>
+        <button class="btn" id="surprise">Kalp Gönder</button>
+      </div>
     </main>
 
     <footer>
-      <div>Bu sayfa <strong>Mehmet Ali</strong> tarafından <strong>Hira</strong> için hazırlandı. ♥</div>
+      Bu sayfa <strong>Mehmet Ali</strong> tarafından <strong>Hira</strong> için hazırlandı. ♥
     </footer>
   </div>
 
   <script>
     const heartsEl = document.getElementById('hearts');
-    function makeHeart(){
+    function makeHeart() {
       const i = document.createElement('i');
-      const size = Math.random()*18 + 12;
+      const size = Math.random() * 18 + 12;
       i.textContent = '❤';
-      i.style.left = (Math.random()*100)+'%';
-      i.style.fontSize = size+'px';
-      i.style.animationDuration = (5+Math.random()*6)+'s';
+      i.style.left = Math.random() * 100 + '%';
+      i.style.fontSize = size + 'px';
+      i.style.animationDuration = 5 + Math.random() * 6 + 's';
       heartsEl.appendChild(i);
-      setTimeout(()=>{i.remove()},11000);
+      setTimeout(() => i.remove(), 11000);
     }
-    setInterval(makeHeart,650);
+    setInterval(makeHeart, 800);
 
-    document.getElementById('loveBtn').addEventListener('click',()=>{
+    document.getElementById('loveBtn').addEventListener('click', () => {
       alert('Seni seviyorum, Hira! ❤️ - Mehmet Ali');
     });
-    document.getElementById('surprise').addEventListener('click',()=>{
+
+    document.getElementById('surprise').addEventListener('click', () => {
       const el = document.createElement('div');
       el.textContent = '💌 Kalp gönderildi!';
-      el.style.position='fixed';el.style.left='50%';el.style.top='18%';el.style.transform='translateX(-50%)';el.style.padding='12px 18px';el.style.borderRadius='10px';el.style.background='rgba(0,0,0,0.6)';el.style.backdropFilter='blur(6px)';el.style.zIndex=9999;document.body.appendChild(el);
-      setTimeout(()=>el.remove(),2200);
+      el.style.position = 'fixed';
+      el.style.left = '50%';
+      el.style.top = '20%';
+      el.style.transform = 'translateX(-50%)';
+      el.style.padding = '10px 16px';
+      el.style.borderRadius = '10px';
+      el.style.background = 'rgba(0, 0, 0, 0.6)';
+      el.style.backdropFilter = 'blur(6px)';
+      el.style.zIndex = 9999;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 2000);
     });
   </script>
 </body>
