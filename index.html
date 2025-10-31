@@ -3,11 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Hira ♥️ ve Mehmet Ali</title>
+  <title>Hirama ♥️</title>
   <style>
     :root {
       --bg: #0f1724;
-      --card: #0b1220;
       --accent: #ff6b81;
       --muted: #9aa4b2;
     }
@@ -18,19 +17,79 @@
       background: linear-gradient(180deg, #071027 0%, #071622 100%);
       color: #e6eef6;
       min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Giriş ekranı */
+    #intro {
+      position: fixed;
+      inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 10px;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      transition: opacity 1s ease;
     }
+    #intro.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .intro-box {
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      animation: popIn 0.8s ease;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .intro-box h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .intro-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+    .intro-buttons button {
+      background: linear-gradient(90deg, var(--accent), #ffd37a);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #071227;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .intro-buttons button:hover {
+      transform: scale(1.05);
+    }
+
+    /* Ana kart */
     .card {
-      width: 100%;
+      width: 90%;
       max-width: 480px;
       background: rgba(255, 255, 255, 0.05);
       border-radius: 20px;
       box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.1);
+      margin: 40px auto;
+      padding-bottom: 10px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
     }
     header {
       text-align: center;
@@ -102,12 +161,13 @@
       border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* Floating hearts */
+    /* Kalpler */
     .hearts {
-      position: absolute;
+      position: fixed;
       inset: 0;
       pointer-events: none;
       overflow: hidden;
+      z-index: 0;
     }
     .hearts i {
       position: absolute;
@@ -124,13 +184,26 @@
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="hearts" id="hearts"></div>
+  <div class="hearts" id="hearts"></div>
+
+  <!-- Giriş kutusu -->
+  <div id="intro">
+    <div class="intro-box">
+      <h2>Beni Seviyor musun? 💞</h2>
+      <div class="intro-buttons">
+        <button class="yesBtn">Evet</button>
+        <button class="yesBtn">Evet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ana içerik -->
+  <div class="card" id="mainCard">
     <header>
       <div class="avatar">H</div>
-      <h1>Hira ♥️ ve Mehmet Ali</h1>
+      <h1>Hiram ♥️</h1>
       <div class="madeby">Hazırlayan: Mehmet Ali</div>
-      <p class="lead">Sana özel küçük bir sayfa — sevgiyle yapıldı.</p>
+      <p class="lead">sevgiyle yapıldı.</p>
       <button class="btn" id="loveBtn">Seni seviyorum <span class="heart">❤</span></button>
     </header>
 
@@ -138,8 +211,8 @@
       <div class="card-box">
         <div class="message">
           Hiram ❤️<br><br>
-          Sen sormadın ama ben söyleyeyim 😄 1.5 yıldır falan kodlama yapıyorum. Site falan yapıp satıyorum ama bu sefer ikimiz için yapmak istedim. 💻❤️<br><br>
-          Bu site sadece bizim için, içten ve samimi bir hatıra olarak kalsın istedim.
+          Sen sormadın ama ben söyleyeyim  1.5 yıldır falan kodlama yapıyorum. Site falan yapıp satıyorum ama bu sefer senin için yapmak istedim. ❤️<br><br>
+          Bu site sadece senin için, içten ve samimi bir hatıra olarak kalsın istedim.
         </div>
       </div>
 
@@ -156,6 +229,7 @@
   </div>
 
   <script>
+    // Kalp animasyonu
     const heartsEl = document.getElementById('hearts');
     function makeHeart() {
       const i = document.createElement('i');
@@ -163,11 +237,25 @@
       i.textContent = '❤';
       i.style.left = Math.random() * 100 + '%';
       i.style.fontSize = size + 'px';
+      i.style.color = '#ff6b81';
       i.style.animationDuration = 5 + Math.random() * 6 + 's';
       heartsEl.appendChild(i);
       setTimeout(() => i.remove(), 11000);
     }
     setInterval(makeHeart, 800);
+
+    // Evet tıklama olayı
+    const intro = document.getElementById('intro');
+    const mainCard = document.getElementById('mainCard');
+    document.querySelectorAll('.yesBtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        intro.classList.add('hidden');
+        setTimeout(() => {
+          intro.style.display = 'none';
+          mainCard.classList.add('show');
+        }, 1000);
+      });
+    });
 
     document.getElementById('loveBtn').addEventListener('click', () => {
       alert('Seni seviyorum, Hira! ❤️ - Mehmet Ali');
